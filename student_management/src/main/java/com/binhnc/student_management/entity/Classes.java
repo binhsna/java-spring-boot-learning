@@ -1,10 +1,15 @@
 package com.binhnc.student_management.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
-import static javax.persistence.GenerationType.SEQUENCE;
-
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity(name = "Class")
 @Table(name = "class")
 public class Classes {
@@ -13,10 +18,7 @@ public class Classes {
     @Column(name = "id")
     private Long id;
     @Column(name = "name")
-    private String name;
-    public Classes() {
-        super();
-    }
-
+    @NonNull
+    private  String name;
 
 }

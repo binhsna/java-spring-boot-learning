@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="~{shared/header :: header}">
     <meta charset="UTF-8">
-    <title>Spring Boot web</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <title>Thực Tập VNPT</title>
 </head>
 <body>
-<!--webjars\bootstrap\4.3.1\css\bootstrap.min.css-->
-<div class="container-fluid text-center">
-    <h1>Welcome the my application</h1>
-    <a class="h2" th:href="@{/users}">Manage Users</a>
+<div th:replace="~{shared/header :: navbar}"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="text-center" th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+            <h2 class="text-center">Student Management</h2>
+        </div>
+    </div>
 </div>
 </body>
 </html>

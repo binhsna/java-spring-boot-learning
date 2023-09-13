@@ -2,9 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="header">
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" />
-    <script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" ></script>
+    <title>[[${pageTitle}]]</title>
+    <!--webjars\bootstrap\4.3.1\css\bootstrap.min.css-->
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+    <script src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
     <style>
         .btn {
             border-radius: 8px;
@@ -20,7 +21,7 @@
 <body>
     <div th:fragment="navbar">
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-            <a class="navbar-brand" href="/">STMN</a>
+            <a class="navbar-brand" href="/">SCHOOL</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -28,10 +29,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" th:href="@{'/student'}">Student <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" th:href="@{'/student_index'}">Student <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{'/course'}">Course</a>
+                        <a class="nav-link" th:href="@{'/course_index'}">Course</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{'/class'}">Class</a>

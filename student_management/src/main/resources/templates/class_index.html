@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="~{shared/header :: header}"></head>
+<body>
+<div th:replace="~{shared/header :: navbar}"></div>
+<br>
+<div class="container-fluid text-center">
+    <div th:if="${success_message}" class="alert alert-success text-center">
+        [[${success_message}]]
+    </div>
+    <div th:if="${error_message}" class="alert alert-danger text-center">
+        [[${error_message}]]
+    </div>
+    <div class="text-left" sec:authorize="hasAnyRole('USER', 'ADMIN')">
+        <a class="btn btn-primary" th:href="@{/class/new}">Thêm mới</a>
+    </div>
+    <br>
+    <div>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th sec:authorize="hasRole('ADMIN')">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="c:${listClass}">
+                <tr>
+                    <td>[[${c.id}]]</td>
+                    <td>[[${c.name}]]</td>
+                    <td sec:authorize="hasRole('ADMIN')">
+                        <a class="btn btn-primary btn-sm" th:href="@{'/class/edit/'+${c.id}}">Sửa</a>
+                        <a class="btn btn-danger btn-sm" th:href="@{'/class/delete/'+${c.id}}">Xóa</a>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
