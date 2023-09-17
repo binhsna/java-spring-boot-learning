@@ -1,6 +1,12 @@
 package com.binhnc.student_management.entity;
 
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+
+import java.io.Serializable;
+import java.util.Date;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -8,10 +14,11 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Table(
         name = "student",
         uniqueConstraints = {
-                @UniqueConstraint(name = "student_email_unique", columnNames = "email")
-        }
-)
-public class Student {
+                @UniqueConstraint(name = "uk_student_email", columnNames = "email"),
+                @UniqueConstraint(name = "uk_student_phone", columnNames = "phone")
+        })
+@Data
+public class Student implements Serializable {
     @Id
     @SequenceGenerator(
             name = "student_sequence",
@@ -28,90 +35,27 @@ public class Student {
     )
     private Long id;
     @Column(
-            name = "firstName",
+            name = "mame",
             nullable = false,
             columnDefinition = "TEXT"
     )
-    private String firstName;
-    @Column(
-            name = "lastName",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
-    private String lastName;
+    private String name;
+    @Column(name = "gender")
+    private boolean gender = true;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "birthday")
+    private Date birthday;
+    @Column(name = "phone", length = 10, nullable = false)
+    private String phone;
     @Column(
             name = "email",
             nullable = false,
-            columnDefinition = "varchar(50)",
-            unique = true
+            columnDefinition = "varchar(20)"
     )
     private String email;
-    @Column(
-            name = "age"
-            , nullable = false
-    )
-    private Integer age;
-
-    public Student() {
-        super();
-    }
-
-    public Student(String firstName, String lastName, String email, Integer age) {
-        super();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.age = age;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", age=" + age +
-                '}';
-    }
+    // Mối quan hệ n-1 giữa sinh viên với lớp học
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "class_id", foreignKey = @ForeignKey(name = "fk_student_class"))
+    private Classes rl_class_student;
 }

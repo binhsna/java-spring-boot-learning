@@ -2,7 +2,6 @@ package com.binhnc.student_management.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -37,27 +36,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     @Bean
     protected UserDetailsService userDetailsService() {
-        UserDetails user1 = User.withUsername("binhnc")
-                .password("$2a$10$fwradv4OKJeY.O.SZ8QpI.AbI/HwCu6HVgTwXBsqT.9Iwwthe0vna")
+        UserDetails user1 = User.withUsername("user")
+                .password("$2a$10$eywrhes7PgbWamY2/dtmleg6NuB44vfZzbgkwhc0AIr3Sw9mlCA1S")
                 .roles("USER")
                 .build();
-
-        return new InMemoryUserDetailsManager(user1);
+        UserDetails user2 = User.withUsername("admin")
+                .password("$2a$10$eywrhes7PgbWamY2/dtmleg6NuB44vfZzbgkwhc0AIr3Sw9mlCA1S")
+                .roles("ADMIN")
+                .build();
+        return new InMemoryUserDetailsManager(user1, user2);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests()
+        http
+                .authorizeHttpRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/class/new").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/class/edit/*", "/class/delete/*").hasRole("ADMIN")
+                .antMatchers("/**/new", "/**", "/**/edit/*").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login").permitAll()
-                .and().logout().permitAll()
-                .and().httpBasic()
+                .loginPage("/login")
+                .permitAll()
                 .and()
-                .exceptionHandling().accessDeniedPage("/403");
+                .logout().permitAll();
     }
 }

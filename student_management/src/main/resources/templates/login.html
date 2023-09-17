@@ -1,50 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <!--  32'41  -->
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <style type="text/css">
-        body div {
-            text-align: center;
-        }
-
-        label, input[type=text], input[type=password] {
-            display: inline-block;
-            width: 150px;
-            height: 5px;
-        }
-
-        input[type=submit] {
-            width: 60px;
-            margin: 10px;
-            padding: 10px;
-            text-align: center;
-        }
-
-    </style>
-</head>
+<head th:replace="~{shared/header :: header}"></head>
 <body>
-<div>
-    <div>
-        <h2>Vui lòng đăng nhập</h2>
+<div align="center">
+    <div class="col-sm-4">
+        <form action="#" th:action="@{/login}" method="post">
+            <br/>
+            <h2>Đăng nhập</h2>
+            <div th:if="${param.error}">
+                <h3>Sai username hoặc mật khẩu</h3>
+            </div>
+            <div th:if="${param.logout}">
+                <h3>Đăng xuất thành công</h3>
+            </div>
+            <br/>
+            <div class="form-group text-left">
+                <label class="form-label">Tên đăng nhập</label>
+                <input type="text" class="form-control" name="username" required placeholder="username">
+            </div>
+            <div class="form-group text-left">
+                <label class="form-label">Mật khẩu</label>
+                <input type="password" class="form-control" name="password" required placeholder="Mật khẩu">
+            </div>
+            <br/>
+            <div class="form-group" align="right">
+                <input type="submit" class="btn btn-info" value="Đăng nhập"/>
+            </div>
+        </form>
     </div>
-    <div th:if="${param.error}">
-        <h3>Sai username or password</h3>
-    </div>
-    <form th:action="@{/login}" method="post">
-        <div>
-            <label>Username: </label>
-            <input type="text" name="username">
-        </div>
-        <div>
-            <label>Password: </label>
-            <input type="password" name="password">
-        </div>
-        <div>
-            <input type="submit" value="login">
-        </div>
-    </form>
 </div>
 </body>
 </html>

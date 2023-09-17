@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="~{shared/header :: header}"></head>
+<body>
+<div th:replace="~{shared/header :: navbar}"></div>
+<br>
+<div class="container-fluid text-center">
+    <div th:if="${success_message}" class="alert alert-success text-center">
+        [[${success_message}]]
+    </div>
+    <div th:if="${error_message}" class="alert alert-danger text-center">
+        [[${error_message}]]
+    </div>
+    <div class="text-left" sec:authorize="hasAnyRole('USER', 'ADMIN')">
+        <a class="btn btn-primary" th:href="@{/student/new}">Thêm mới</a>
+    </div>
+    <br>
+    <div>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Birthday</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Class</th>
+                <th sec:authorize="hasRole('ADMIN')">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="s:${listStudent}">
+                <tr>
+                    <td th:text="${s.id}"></td>
+                    <td th:text="${s.name}"></td>
+                    <td th:text="${s.gender}?'Nam':'Nữ'"></td>
+                    <td th:text="${s.birthday}"></td>
+                    <td th:text="${s.phone}"></td>
+                    <td>[[${s.email}]]</td>
+                    <td sec:authorize="hasRole('ADMIN')">
+                        <a class="btn btn-primary btn-sm" th:href="@{'/student/edit/'+${c.id}}">Sửa</a>
+                        <a class="btn btn-danger btn-sm" th:href="@{'/student/delete/'+${c.id}}">Xóa</a>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
