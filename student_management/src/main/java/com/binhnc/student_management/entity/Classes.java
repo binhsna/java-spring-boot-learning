@@ -27,7 +27,7 @@ public class Classes implements Serializable {
     private String name;
     // Mối quan hệ 1-n giữa lớp học và sinh viên(học sinh)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "rl_class_student", cascade = CascadeType.ALL)
-    private Set<Student> rl_student_class;
+    private List<Student> rl_student_class;
     // Mối quan hệ n-n giữa lớp học và môn học
     @ManyToMany
     @JoinTable(name = "rl_class_subject",

@@ -25,7 +25,7 @@ public class Teacher implements Serializable {
     @Column(name = "gender")
     private boolean gender;
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "birthday")
     private Date birthday;
     @Column(name = "phone", length = 10, nullable = false)

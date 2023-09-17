@@ -39,9 +39,11 @@
                     <td th:text="${s.birthday}"></td>
                     <td th:text="${s.phone}"></td>
                     <td>[[${s.email}]]</td>
+                    <td th:text="${s.rl_class_student.getName()}"></td>
                     <td sec:authorize="hasRole('ADMIN')">
-                        <a class="btn btn-primary btn-sm" th:href="@{'/student/edit/'+${c.id}}">Sửa</a>
-                        <a class="btn btn-danger btn-sm" th:href="@{'/student/delete/'+${c.id}}">Xóa</a>
+                        <a class="btn btn-primary btn-sm" th:href="@{'/student/edit/'+${s.id}}">Sửa</a>
+                        <a class="btn btn-danger btn-sm" th:href="@{'/student/delete/'+${s.id}}"
+                           onclick="return confirmDelete()">Xóa</a>
                     </td>
                 </tr>
             </th:block>
@@ -49,5 +51,15 @@
         </table>
     </div>
 </div>
+
+<script th:inline="javascript">
+    function confirmDelete() {
+        if (confirm('Bạn chắc chắn muốn xóa bản ghi?')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
 </body>
 </html>

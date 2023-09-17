@@ -31,11 +31,11 @@ public class Student implements Serializable {
     )
     @Column(
             name = "id",
-            updatable = false
+            updatable = true
     )
     private Long id;
     @Column(
-            name = "mame",
+            name = "name",
             nullable = false,
             columnDefinition = "TEXT"
     )

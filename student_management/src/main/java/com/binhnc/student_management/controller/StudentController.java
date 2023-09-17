@@ -23,7 +23,7 @@ public class StudentController {
     private ClassService classService;
 
     @GetMapping("/student")
-    public String showClassList(Model model) {
+    public String showStudentList(Model model) {
         List<Student> list = service.findAll();
         model.addAttribute("listStudent", list);
         return "student_index";
@@ -41,10 +41,12 @@ public class StudentController {
     @GetMapping("/student/edit/{id}")
     public String showEditForm(@PathVariable("id") Long id, Model model, RedirectAttributes ra) {
         try {
+            List<Classes> listClass = classService.findAll();
             Student student = service.findById(id).get();
+            model.addAttribute("classList", listClass);
             model.addAttribute("student", student);
             model.addAttribute("pageTitle", "Sửa thông tin sinh viên ID: " + id + "");
-            return "class_form";
+            return "student_form";
         } catch (Exception e) {
             ra.addFlashAttribute("error_message", e.getMessage());
             return "redirect:/student";
@@ -66,6 +68,6 @@ public class StudentController {
         } catch (Exception e) {
             ra.addFlashAttribute("error_message", e.getMessage());
         }
-        return "redirect:/class";
+        return "redirect:/student";
     }
 }

@@ -51,14 +51,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests()
-                .antMatchers("/").permitAll()
                 .antMatchers("/**/new", "/**", "/**/edit/*").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
+                // .loginPage("/login")
                 .permitAll()
                 .and()
-                .logout().permitAll();
+                .exceptionHandling()
+                .accessDeniedPage("/403") // Chuyển hướng đến trang 403.html khi không có quyền truy cập
+                .and()
+                .logout()
+                .permitAll();
     }
 }
