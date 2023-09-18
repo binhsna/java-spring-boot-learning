@@ -1,6 +1,7 @@
 package com.binhnc.student_management.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -8,7 +9,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity(name = "Teacher")
 @Table(name = "teacher",
         uniqueConstraints = {
@@ -23,7 +25,7 @@ public class Teacher implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "gender")
-    private boolean gender;
+    private boolean gender = true;
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "birthday")
@@ -33,7 +35,10 @@ public class Teacher implements Serializable {
     @Column(name = "email", nullable = false, length = 20)
     private String email;
     // Mối quan hệ n-n giữa giáo viên với môn học
-    @ManyToMany(mappedBy = "rl_subject_teacher")
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "rl_teacher_subject",
+            joinColumns = @JoinColumn(name = "teacher_id", foreignKey = @ForeignKey(name = "fk_teacher_subject_teacher_id")),
+            inverseJoinColumns = @JoinColumn(name = "subject_id", foreignKey = @ForeignKey(name = "fk_teacher_subject_subject_id")))
     private List<Subject> rl_teacher_subject;
 
 }

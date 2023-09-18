@@ -13,7 +13,7 @@
         [[${error_message}]]
     </div>
     <div class="text-left" sec:authorize="hasAnyRole('USER', 'ADMIN')">
-        <a class="btn btn-primary" th:href="@{/class/new}">Thêm mới</a>
+        <a class="btn btn-primary" th:href="@{/subject/new}">Thêm mới</a>
     </div>
     <br>
     <div>
@@ -26,13 +26,13 @@
             </tr>
             </thead>
             <tbody>
-            <th:block th:each="c:${listClass}">
+            <th:block th:each="subject:${listSubject}">
                 <tr>
-                    <td>[[${c.id}]]</td>
-                    <td>[[${c.name}]]</td>
+                    <td>[[${subject.id}]]</td>
+                    <td>[[${subject.name}]]</td>
                     <td sec:authorize="hasRole('ADMIN')">
-                        <a class="btn btn-primary btn-sm" th:href="@{'/class/edit/'+${c.id}}">Sửa</a>
-                        <a class="btn btn-danger btn-sm" th:href="@{'/class/delete/'+${c.id}}"
+                        <a class="btn btn-primary btn-sm" th:href="@{'/subject/edit/'+${subject.id}}">Sửa</a>
+                        <a class="btn btn-danger btn-sm" th:href="@{'/subject/delete/'+${subject.id}}"
                            onclick="return confirmDelete()">Xóa</a>
                     </td>
                 </tr>
@@ -52,10 +52,3 @@
 </script>
 </body>
 </html>
-<!--
-<label for="subjectList">Các môn học đăng ký:</label>
-<input type="text" id="subjectList"
-name="subjectList"
-th:field="*{subjectIds}"
-th:value="${#lists.join(student.subjectIds, ',')}" />
--->

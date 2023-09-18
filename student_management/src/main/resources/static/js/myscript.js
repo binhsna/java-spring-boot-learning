@@ -33,4 +33,5 @@ function validateFormStudent() {
         email.focus();
         return false;
     }
+    return true;
 }
