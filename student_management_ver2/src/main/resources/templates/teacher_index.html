@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="~{shared/header :: header}"></head>
+<body>
+<div th:replace="~{shared/header :: navbar}"></div>
+<br>
+<div class="container-fluid text-center">
+    <div th:if="${success_message}" class="alert alert-success text-center">
+        [[${success_message}]]
+    </div>
+    <div th:if="${error_message}" class="alert alert-danger text-center">
+        [[${error_message}]]
+    </div>
+    <div class="text-left" sec:authorize="hasAnyRole('USER', 'ADMIN')">
+        <a class="btn btn-primary" th:href="@{/teacher/new}">Thêm mới</a>
+    </div>
+    <br>
+    <div>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Birthday</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th sec:authorize="hasRole('ADMIN')">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="t:${listTeacher}">
+                <tr>
+                    <td th:text="${t.id}"></td>
+                    <td th:text="${t.name}"></td>
+                    <td th:text="${t.gender}?'Nam':'Nữ'"></td>
+                    <td th:text="${t.birthday}"></td>
+                    <td th:text="${t.phone}"></td>
+                    <td>[[${t.email}]]</td>
+                    <td sec:authorize="hasRole('ADMIN')">
+                        <a class="btn btn-primary btn-sm" th:href="@{'/teacher/edit/'+${t.id}}">Sửa</a>
+                        <a class="btn btn-danger btn-sm" th:href="@{'/teacher/delete/'+${t.id}}"
+                           onclick="return confirmDelete()">Xóa</a>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script th:inline="javascript">
+    function confirmDelete() {
+        if (confirm('Bạn chắc chắn muốn xóa bản ghi?')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+</body>
+</html>

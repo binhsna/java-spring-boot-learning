@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="~{shared/header :: header}"></head>
+<body>
+<div th:replace="~{shared/header :: navbar}"></div>
+<br>
+<div class="container-fluid">
+    <div class="text-center"><h2>[[${pageTitle}]]</h2></div>
+    <form action="#" th:action="@{/class/save}" method="post" th:object="${myclass}"
+          style="max-width: 500px; margin: 0 auto;">
+        <div class="border border-secondary rounded p-3">
+            <div class="form-group text-left">
+                <input type="hidden" th:field="*{id}"/>
+                <label for="name">Tên lớp<strong style="color: red;">*</strong></label>
+                <input id="name" type="text" class="form-control" placeholder="Nhập tên lớp" th:field="*{name}"
+                       required minlength="4" maxlength="20"/>
+            </div>
+            <div class="form-group text-left">
+                <label for="rl_class_subject">Các môn học:</label>
+                <select class="form-control" id="rl_class_subject" name="rl_class_subject" multiple="multiple"
+                        th:field="*{rl_class_subject}">
+                    <option th:each="subject : ${allSubjects}"
+                            th:value="${subject.id}"
+                            th:text="${subject.name}"
+                            th:selected="${myclass != null && myclass.rl_class_subject != null && myclass.rl_class_subject.contains(subject)}">
+                    </option>
+                </select>
+            </div>
+            <!--  -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary m-2">Lưu</button>
+                <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Hủy</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!--<script th:inline="javascript">-->
+<script type="text/javascript">
+    function cancelForm() {
+        window.location = "[[@{/class}]]"
+    }
+</script>
+</body>
+</html>

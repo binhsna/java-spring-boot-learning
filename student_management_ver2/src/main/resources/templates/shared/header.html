@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header">
+    <meta charset="UTF-8">
+    <title>[[${pageTitle}]]</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css"/>-->
+    <!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+    <style>
+        .btn {
+            border-radius: 8px;
+            min-width: 68px;
+        }
+
+        button a {
+            text-decoration: none;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div th:fragment="navbar">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <a class="navbar-brand" href="/">SCHOOL</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{'/student'}">Student<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{'/subject'}">Subject</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{'/class'}">Class</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{'/teacher'}">Teacher</a>
+                </li>
+            </ul>
+        </div>
+        <div align="right">
+            <!--            <button class="btn btn-danger"><a th:href="@{/login}">Logout</a></button>-->
+
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" class="btn btn-danger" value="Đăng xuất"/>
+            </form>
+
+        </div>
+    </nav>
+</div>
+</body>
+</html>
