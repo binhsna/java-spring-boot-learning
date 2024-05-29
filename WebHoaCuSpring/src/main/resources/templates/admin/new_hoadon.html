@@ -1,4 +1,4 @@
-<html lang="en" 
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="admin/layout">
 <title>Quản Lý Hoá Đơn</title>
@@ -15,7 +15,7 @@
         <form action="#" th:action="@{/saveHoaDon}" th:object="${hoadon}" method="POST">
         
       	  	<label for="shd"><strong>Số hoá đơn:</strong></label>
-            <input type="text" th:field="*{shd}" placeholder="Số Hoá Đơn" class="form-control mb-4 col-4">
+            <input type="text" th:field="*{shd}" id="shd" placeholder="Số Hoá Đơn" class="form-control mb-4 col-4">
 			<span style="color:red" th:if="${#fields.hasErrors('shd')}" th:errors="*{shd}">SHD Error</span>
 			</br>
 			
@@ -31,12 +31,12 @@
     		</br>
             
             <label for="diaChiNhan"><strong>Địa chỉ nhận:</strong></label>
-            <input type="text" th:field="*{diaChiNhan}" placeholder="Địa Chỉ Nhận" class="form-control mb-4 col-4">
+            <input type="text" th:field="*{diaChiNhan}" id="diaChiNhan" placeholder="Địa Chỉ Nhận" class="form-control mb-4 col-4">
             <span style="color:red" th:if="${#fields.hasErrors('diaChiNhan')}" th:errors="*{diaChiNhan}">Dia Chi Nhan Error</span>
             </br>
             
 			<label for="tinhTrang"><strong>Tình trạng:</strong></label>
-          	<select th:field="*{tinhTrang}" class="form-select" aria-label="Default select example">
+          	<select th:field="*{tinhTrang}" id="tinhTrang" class="form-select" aria-label="Default select example">
 				  <option value="Chưa xác nhận">Chưa xác nhận</option>
 				  <option value="Xác nhận">Xác nhận</option>
 				  <option value="Đang giao">Đang giao</option>
@@ -45,7 +45,7 @@
             </br>
             
             <label for="maKH"><strong>Khách hàng:</strong></label>
-             <select th:field="*{maKH}" class="form-select"> 
+             <select th:field="*{maKH}" class="form-select" id="maKH">
                 <option th:each="KhachHang : ${listKhachHangs}"
                     th:value="${KhachHang.maKH}"
                     th:text="${KhachHang.hoTen}" ></option>

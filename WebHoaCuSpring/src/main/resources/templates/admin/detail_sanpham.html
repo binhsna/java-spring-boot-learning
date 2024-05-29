@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" 
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="admin/layout">
 <title>Quản Lý Sản Phẩm</title>
@@ -38,16 +38,16 @@
 		            <input type="hidden" th:field="*{maSP}" />
 		            
 		            <label for="tenSP"><strong>Tên sản phẩm:</strong></label>
-		           	<input type="text" th:field="*{tenSP}" class="form-control mb-4 col-4">	
+		           	<input type="text" th:field="*{tenSP}" id="tenSP" class="form-control mb-4 col-4">
 		           	
 		           	<label for="dacDiem"><strong>Đặc điểm:</strong></label>
-					<textarea style="width: 100%" rows="4" disabled th:field="*{dacDiem}" class="form-control mb-4 col-4"></textarea>
+					<textarea style="width: 100%" rows="4" disabled th:field="*{dacDiem}" id="dacDiem" class="form-control mb-4 col-4"></textarea>
 		            
 		            <label for="donGia"><strong>Đơn giá:</strong></label>
-		            <input type="text" th:field="*{donGia}" class="form-control mb-4 col-4">
+		            <input type="text" th:field="*{donGia}" id="donGia" class="form-control mb-4 col-4">
 		            
 		            <label for="ghiChu"><strong>Ghi chú:</strong></label>
-		            <input type="text" th:field="*{ghiChu}" class="form-control mb-4 col-4">
+		            <input type="text" th:field="*{ghiChu}" id="ghiChu" class="form-control mb-4 col-4">
 		            
 <!-- 		            <label for="maSize"><strong>Size:</strong></label>
 		            <select th:field="*{maSize}" class="form-select"> 
@@ -58,7 +58,7 @@
 		            </br> -->
 		            
 		            <label for="maLoaiSP"><strong>Loại sản phẩm:</strong></label>
-		            <select th:field="*{maLoaiSP}" class="form-select"> 
+		            <select th:field="*{maLoaiSP}" class="form-select" id="maLoaiSP">
 		                <option th:each="LoaiSanPham : ${listLoaiSanPhams}"
 		                    th:value="${LoaiSanPham.maLoaiSP}"
 		                    th:text="${LoaiSanPham.tenLoaiSP}" ></option>
@@ -66,7 +66,7 @@
 		            </br>
 		            
 		            <label for="maHangSX"><strong>Hãng sản xuất:</strong></label>    
-		            <select th:field="*{maHangSX}" class="form-select"> 
+		            <select th:field="*{maHangSX}" class="form-select" id="maHangSX">
 		                <option th:each="HangSanXuat : ${listHangSanXuats}"
 		                    th:value="${HangSanXuat.maHangSX}"
 		                    th:text="${HangSanXuat.tenHangSX}" ></option>

@@ -1,4 +1,4 @@
-<html lang="en" 
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="admin/layout">
 <title>Quản Lý Quyền</title>
@@ -17,7 +17,7 @@
 
         <form action="#" th:action="@{/saveQuyen}" th:object="${quyen}" method="POST">
         	<label for="tenQuyen"><strong>Quyền:</strong></label>
-            <input type="text" th:field="*{tenQuyen}" placeholder="Tên Quyền" class="form-control col-4">
+            <input type="text" th:field="*{tenQuyen}" id="tenQuyen" placeholder="Tên Quyền" class="form-control col-4">
             <p style="color:red;" th:if="${#fields.hasErrors('tenQuyen')}" th:errors="*{tenQuyen}">Ten Quyen error</p>
 			</br>
 

@@ -1,4 +1,4 @@
-<html lang="en" 
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="admin/layout">
 <title>Quản Lý Phân Quyền</title>
@@ -17,7 +17,7 @@
 
         <form action="#" th:action="@{/savePhanQuyen}" th:object="${phanquyen}" method="POST">
         	<label for="maNV"><strong>Nhân viên:</strong></label>    
-            <select th:field="*{maNV}" class="form-select"> 
+            <select th:field="*{maNV}" id="maNV" class="form-select">
                 <option th:each="NhanVien : ${listNhanViens}"
                     th:value="${NhanVien.maNV}"
                     th:text="${NhanVien.hoTen}" ></option>
@@ -25,7 +25,7 @@
             </br>
             
             <label for="maQuyen"><strong>Quyền:</strong></label>    
-            <select th:field="*{maQuyen}" class="form-select"> 
+            <select th:field="*{maQuyen}" id="maQuyen" class="form-select">
                 <option th:each="Quyen : ${listQuyens}"
                     th:value="${Quyen.maQuyen}"
                     th:text="${Quyen.tenQuyen}" ></option>

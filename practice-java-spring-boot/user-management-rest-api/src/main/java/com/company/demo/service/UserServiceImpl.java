@@ -1,6 +1,7 @@
 package com.company.demo.service;
 
 import com.company.demo.entity.User;
+import com.company.demo.exception.NotFoundException;
 import com.company.demo.model.dto.UserDto;
 import com.company.demo.model.mapper.UserMapper;
 import org.springframework.stereotype.Component;
@@ -36,7 +37,7 @@ public class UserServiceImpl implements UserService {
                 return UserMapper.toUserDto(user);
             }
         }
-        return null;
+        throw new NotFoundException("User không tồn tại trong hệ thống");
     }
 
     @Override

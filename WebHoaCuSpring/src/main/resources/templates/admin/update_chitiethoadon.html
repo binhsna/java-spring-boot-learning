@@ -1,4 +1,5 @@
-<html lang="en" 
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="admin/layout">
 <title>Quản Lý Chi Tiết Hoá Dơn</title>
@@ -22,7 +23,7 @@
             <input type="hidden" th:field="*{maHD}" />
             
 			<label for="maSP"><strong>Sản phẩm:</strong></label>
-             <select th:field="*{maSP}" class="form-select"> 
+             <select th:field="*{maSP}" class="form-select" id="maSP">
                 <option th:each="SanPham : ${listSanPhams}"
                     th:value="${SanPham.maSP}"
                     th:text="${SanPham.tenSP}" ></option>
@@ -30,10 +31,10 @@
             </br>
 
 			<label for="soLuong"><strong>Số lượng:</strong></label>
-            <input type="text" th:field="*{soLuong}" class="form-control mb-4 col-4">
+            <input type="text" th:field="*{soLuong}" id="soLuong" class="form-control mb-4 col-4">
 				
 			<label for="donGia"><strong>Đơn giá:</strong></label>
-            <input type="text" th:field="*{donGia}" class="form-control mb-4 col-4">
+            <input type="text" th:field="*{donGia}" id="donGia" class="form-control mb-4 col-4">
      
             <button type="submit" class="btn btn-info col-2">Cập nhật</button>
         </form>

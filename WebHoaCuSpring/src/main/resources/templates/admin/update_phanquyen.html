@@ -1,4 +1,4 @@
-<html lang="en" 
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="admin/layout">
 <title>Quản Lý Phân Quyền</title>
@@ -9,43 +9,38 @@
  crossorigin="anonymous">
 <body>
 <div layout:fragment="content">
-<div class="content-wrapper">
+    <div class="content-wrapper">
 		 <div class="card">
 	          <div class="card-body">
+            <div class="container">
+                    <h2 class="mb-3">Cập Nhật Phân Quyền</h2>
+                      <form action="#" th:action="@{/savePhanQuyen}" th:object="${phanquyen}" method="POST">
+                        <label for="maNV"><strong>Nhân viên:</strong></label>
+                        <select th:field="*{maNV}" class="form-select" id="maNV">
+                            <option th:each="NhanVien : ${listNhanViens}"
+                                th:value="${NhanVien.maNV}"
+                                th:text="${NhanVien.hoTen}" ></option>
+                        </select>
+                        </br>
 
-<div class="container">
-        <h2 class="mb-3">Cập Nhật Phân Quyền</h2>
+                        <label for="maQuyen"><strong>Quyền:</strong></label>
+                        <select th:field="*{maQuyen}" class="form-select" id="maQuyen">
+                            <option th:each="Quyen : ${listQuyens}"
+                                th:value="${Quyen.maQuyen}"
+                                th:text="${Quyen.tenQuyen}" ></option>
+                        </select>
+                        </br>
 
-        <form action="#" th:action="@{/savePhanQuyen}" th:object="${phanquyen}" method="POST">
+                        <button type="submit" class="btn btn-info col-2">Cập nhật</button>
+                    </form>
+                    <hr>
 
-          <form action="#" th:action="@{/savePhanQuyen}" th:object="${phanquyen}" method="POST">
-        	<label for="maNV"><strong>Nhân viên:</strong></label>    
-            <select th:field="*{maNV}" class="form-select"> 
-                <option th:each="NhanVien : ${listNhanViens}"
-                    th:value="${NhanVien.maNV}"
-                    th:text="${NhanVien.hoTen}" ></option>
-            </select>
-            </br>
-            
-            <label for="maQuyen"><strong>Quyền:</strong></label>    
-            <select th:field="*{maQuyen}" class="form-select"> 
-                <option th:each="Quyen : ${listQuyens}"
-                    th:value="${Quyen.maQuyen}"
-                    th:text="${Quyen.tenQuyen}" ></option>
-            </select>
-            </br>
-            
-            <button type="submit" class="btn btn-info col-2">Cập nhật</button>
-        </form>
-        <hr>
-
-        <a th:href="@{/page_phanquyen}"> Quay lại</a>
+                    <a th:href="@{/page_phanquyen}"> Quay lại</a>
+                </div>
+            </div>
+         </div>
     </div>
 </div>
-	          </div>
-          </div>
-</div>
 
-	
 </body>
 </html>

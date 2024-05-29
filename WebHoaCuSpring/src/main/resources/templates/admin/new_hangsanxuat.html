@@ -1,4 +1,4 @@
-<html lang="en" 
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="admin/layout">
 <title>Quản Lý Hãng Sản Xuất</title>
@@ -18,12 +18,12 @@
 
         <form action="#" th:action="@{/saveHangSanXuat}" th:object="${HangSanXuat}" method="POST">
         	<label for="tenHangSX"><strong>Hãng sản xuất:</strong></label>
-            <input type="text" th:field="*{tenHangSX}" placeholder="Tên Hãng Sản Xuất" class="form-control col-4">
+            <input type="text" th:field="*{tenHangSX}" id="tenHangSX" placeholder="Tên Hãng Sản Xuất" class="form-control col-4">
 			<p style="color:red" th:if="${#fields.hasErrors('tenHangSX')}" th:errors="*{tenHangSX}">Error</p>
 			
             </br>
             <label for="dacDiem"><strong>Đặc điểm:</strong></label>
-            <input type="text" th:field="*{dacDiem}" placeholder="Đặc điểm" class="form-control col-4">
+            <input type="text" th:field="*{dacDiem}" id="dacDiem" placeholder="Đặc điểm" class="form-control col-4">
 			<p style="color:red" th:if="${#fields.hasErrors('dacDiem')}" th:errors="*{dacDiem}">Error</p>
             </br>
             <button type="submit" class="btn btn-info col-2"> Thêm</button>
