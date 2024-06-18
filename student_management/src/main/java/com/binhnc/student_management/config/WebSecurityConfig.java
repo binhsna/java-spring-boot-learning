@@ -50,6 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
+                .antMatchers("/test-object-mapper").permitAll()
                 .antMatchers("/**/new", "/**", "/**/edit/*").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
